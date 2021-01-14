@@ -4,11 +4,14 @@ env:
 
 window:
   dimensions:
-    columns: 100
-    lines: 30
+    columns: 157
+    lines: 53
   padding:
     x: 12
     y: 12
+  position:
+    x: 0
+    y: 0
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: true
@@ -33,7 +36,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Maximized
+  #startup_mode: Maximized
   title: Alacritty
   dynamic_title: true
 
@@ -124,7 +127,7 @@ bell:
 background_opacity: 0.92
 
 selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+#  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: true
@@ -139,6 +142,9 @@ shell:
   program: /bin/zsh
   args:
     - --login
+    - -c
+    - "tmux"
+
 mouse:
 
   # If this is `true`, the cursor is temporarily hidden when typing.
@@ -152,36 +158,23 @@ mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
 key_bindings:
-##CUSTOM BINDINGS##
-  - { key: RBracket, mods: Shift|Command, chars: "\x1b[18;2~" } # VIM: nnoremap <S-F7> :tabnext<CR>
-  - { key: LBracket, mods: Shift|Command, chars: "\x1b[17;2~" } # VIM: nnoremap <S-F6> :tabprevious<CR>
-  - { key: LWin, chars: "\x1b" }
-  - { key: RWin,  chars: "\x1b" } # Meta for tmux
-  - { key: LAlt,  chars: "\x1b" } # Meta for tmux
-  - { key: A, mods: Alt, chars: "\x1ba" }
-  - { key: H, mods: Alt, chars: "\x1bh" }
-  - { key: J, mods: Alt, chars: "\x1bj" }
-  - { key: K, mods: Alt, chars: "\x1bk" }
-  - { key: L, mods: Alt, chars: "\x1bl" }
+
+  - { key: RBracket, mods: Shift, chars: "0x7d" } # VIM: nnoremap <S-F7> :tabnext<CR>
+  - { key: LBracket, mods: Shift, chars: "0x7b" } # VIM: nnoremap <S-F6> :tabprevious<CR>
+
+  - { key: 27, mods: Shift|Alt, chars: "\x1b[18;2~" } # VIM: nnoremap <S-F7> :tabnext<CR>
+  - { key: 26, mods: Shift|Alt, chars: "\x1b[17;2~" } # VIM: nnoremap <S-F6> :tabprevious<CR>
 
 ##GENERIC BINDINGS##
   # (macOS only)
-  - { key: Key0,   mods: Command,            action: ResetFontSize    }
-  - { key: Equals, mods: Command,            action: IncreaseFontSize }
-  - { key: H,      mods: Command,            chars: "\x1bh"           }
-  - { key: K,      mods: Command,            chars: "\x1bk"           }
-  - { key: J,      mods: Command,            chars: "\x1bj"           }
-  - { key: K,      mods: Command,            chars: "\x1bk"           }
-  - { key: Add,    mods: Command,            action: IncreaseFontSize }
-  - { key: Minus,  mods: Command,            action: DecreaseFontSize }
-
-debug:
-  render_timer: false # Display the time it takes to redraw each frame.
-  persistent_logging: true
-  log_level: Warn
-  print_events: false
-
-
+  - { key: Key0,   mods: Alt,            action: ResetFontSize    }
+  - { key: Equals, mods: Alt,            action: IncreaseFontSize }
+  - { key: Subtract, mods: Alt,          action: DecreaseFontSize }
+  - { key: V,      mods: Alt,            action: PasteSelection   }
+  - { key: H,      mods: Alt,            chars: "\x1bh"           }
+  - { key: K,      mods: Alt,            chars: "\x1bk"           }
+  - { key: J,      mods: Alt,            chars: "\x1bj"           }
+  - { key: K,      mods: Alt,            chars: "\x1bk"           }
 
 # Key bindings are specified as a list of objects. For example, this is the
 # default paste binding:
@@ -416,4 +409,10 @@ debug:
   #- { key: F,      mods: Command|Control,    action: ToggleFullscreen }
   #- { key: F,      mods: Command,            action: SearchForward    }
   #- { key: B,      mods: Command,            action: SearchBackward   }
+
+debug:
+  render_timer: false # Display the time it takes to redraw each frame.
+  persistent_logging: true
+  log_level: Warn
+  print_events: false
 
