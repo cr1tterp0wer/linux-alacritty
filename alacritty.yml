@@ -124,7 +124,7 @@ bell:
   animation: EaseOutExpo
   duration: 1
   color: '#fafafa'
-background_opacity: 0.92
+background_opacity: 0.97
 
 selection:
 #  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -145,6 +145,7 @@ shell:
     - -c
     - "tmux"
 
+alt_send_esc: false
 mouse:
 
   # If this is `true`, the cursor is temporarily hidden when typing.
@@ -159,22 +160,95 @@ mouse_bindings:
 
 key_bindings:
 
-  - { key: RBracket, mods: Shift, chars: "0x7d" } # VIM: nnoremap <S-F7> :tabnext<CR>
-  - { key: LBracket, mods: Shift, chars: "0x7b" } # VIM: nnoremap <S-F6> :tabprevious<CR>
-
-  - { key: 27, mods: Shift|Alt, chars: "\x1b[18;2~" } # VIM: nnoremap <S-F7> :tabnext<CR>
-  - { key: 26, mods: Shift|Alt, chars: "\x1b[17;2~" } # VIM: nnoremap <S-F6> :tabprevious<CR>
+  - { key: 27, mods: Shift|Control, chars: "\x1b[18;2~" } # VIM: nnoremap <S-F7> :tabnext<CR>
+  - { key: 26, mods: Shift|Control, chars: "\x1b[17;2~" } # VIM: nnoremap <S-F6> :tabprevious<CR>
 
 ##GENERIC BINDINGS##
   # (macOS only)
-  - { key: Key0,   mods: Alt,            action: ResetFontSize    }
-  - { key: Equals, mods: Alt,            action: IncreaseFontSize }
-  - { key: Subtract, mods: Alt,          action: DecreaseFontSize }
-  - { key: V,      mods: Alt,            action: PasteSelection   }
-  - { key: H,      mods: Alt,            chars: "\x1bh"           }
-  - { key: K,      mods: Alt,            chars: "\x1bk"           }
-  - { key: J,      mods: Alt,            chars: "\x1bj"           }
-  - { key: K,      mods: Alt,            chars: "\x1bk"           }
+  - { key: Key0,     mods: Control,            action: ResetFontSize    }
+  - { key: Equals,   mods: Control,            action: IncreaseFontSize }
+  - { key: Subtract, mods: Control,            action: DecreaseFontSize }
+  - { key: V,        mods: Control,            action: PasteSelection   }
+  - { key: C,        mods: Control,        action: Copy             }
+  - { key: N,        mods: Control,        action: SpawnNewInstance }
+
+  # Meta key support
+  # taken from https://github.com/jwilm/alacritty/issues/62#issuecomment-347552058
+  - { key: A,         mods: Control,       chars: "\x1ba"                       }
+  - { key: B,         mods: Control,       chars: "\x1bb"                       }
+  - { key: C,         mods: Control,       chars: "\x1bc"                       }
+  - { key: D,         mods: Control,       chars: "\x1bd"                       }
+  - { key: E,         mods: Control,       chars: "\x1be"                       }
+  - { key: F,         mods: Control,       chars: "\x1bf"                       }
+  - { key: G,         mods: Control,       chars: "\x1bg"                       }
+  - { key: H,         mods: Control,       chars: "\x1bh"                       }
+  - { key: I,         mods: Control,       chars: "\x1bi"                       }
+  - { key: J,         mods: Control,       chars: "\x1bj"                       }
+  - { key: K,         mods: Control,       chars: "\x1bk"                       }
+  - { key: L,         mods: Control,       chars: "\x1bl"                       }
+  - { key: M,         mods: Control,       chars: "\x1bm"                       }
+  - { key: N,         mods: Control,       chars: "\x1bn"                       }
+  - { key: O,         mods: Control,       chars: "\x1bo"                       }
+  - { key: P,         mods: Control,       chars: "\x1bp"                       }
+  - { key: Q,         mods: Control,       chars: "\x1bq"                       }
+  - { key: R,         mods: Control,       chars: "\x1br"                       }
+  - { key: S,         mods: Control,       chars: "\x1bs"                       }
+  - { key: T,         mods: Control,       chars: "\x1bt"                       }
+  - { key: U,         mods: Control,       chars: "\x1bu"                       }
+  - { key: V,         mods: Control,       chars: "\x1bv"                       }
+  - { key: W,         mods: Control,       chars: "\x1bw"                       }
+  - { key: X,         mods: Control,       chars: "\x1bx"                       }
+  - { key: Y,         mods: Control,       chars: "\x1by"                       }
+  - { key: Z,         mods: Control,       chars: "\x1bz"                       }
+  - { key: A,         mods: Control|Shift, chars: "\x1bA"                       }
+  - { key: B,         mods: Control|Shift, chars: "\x1bB"                       }
+  - { key: C,         mods: Control|Shift, chars: "\x1bC"                       }
+  - { key: D,         mods: Control|Shift, chars: "\x1bD"                       }
+  - { key: E,         mods: Control|Shift, chars: "\x1bE"                       }
+  - { key: F,         mods: Control|Shift, chars: "\x1bF"                       }
+  - { key: G,         mods: Control|Shift, chars: "\x1bG"                       }
+  - { key: H,         mods: Control|Shift, chars: "\x1bH"                       }
+  - { key: I,         mods: Control|Shift, chars: "\x1bI"                       }
+  - { key: J,         mods: Control|Shift, chars: "\x1bJ"                       }
+  - { key: K,         mods: Control|Shift, chars: "\x1bK"                       }
+  - { key: L,         mods: Control|Shift, chars: "\x1bL"                       }
+  - { key: M,         mods: Control|Shift, chars: "\x1bM"                       }
+  - { key: N,         mods: Control|Shift, chars: "\x1bN"                       }
+  - { key: O,         mods: Control|Shift, chars: "\x1bO"                       }
+  - { key: P,         mods: Control|Shift, chars: "\x1bP"                       }
+  - { key: Q,         mods: Control|Shift, chars: "\x1bQ"                       }
+  - { key: R,         mods: Control|Shift, chars: "\x1bR"                       }
+  - { key: S,         mods: Control|Shift, chars: "\x1bS"                       }
+  - { key: T,         mods: Control|Shift, chars: "\x1bT"                       }
+  - { key: U,         mods: Control|Shift, chars: "\x1bU"                       }
+  - { key: V,         mods: Control|Shift, chars: "\x1bV"                       }
+  - { key: W,         mods: Control|Shift, chars: "\x1bW"                       }
+  - { key: X,         mods: Control|Shift, chars: "\x1bX"                       }
+  - { key: Y,         mods: Control|Shift, chars: "\x1bY"                       }
+  - { key: Z,         mods: Control|Shift, chars: "\x1bZ"                       }
+  - { key: Key1,      mods: Control,       chars: "\x1b1"                       }
+  - { key: Key2,      mods: Control,       chars: "\x1b2"                       }
+  - { key: Key3,      mods: Control,       chars: "\x1b3"                       }
+  - { key: Key4,      mods: Control,       chars: "\x1b4"                       }
+  - { key: Key5,      mods: Control,       chars: "\x1b5"                       }
+  - { key: Key6,      mods: Control,       chars: "\x1b6"                       }
+  - { key: Key7,      mods: Control,       chars: "\x1b7"                       }
+  - { key: Key8,      mods: Control,       chars: "\x1b8"                       }
+  - { key: Key9,      mods: Control,       chars: "\x1b9"                       }
+  - { key: Key0,      mods: Control,       chars: "\x1b0"                       }
+  - { key: Space,     mods: Control,       chars: "\x00"                        } # Ctrl + Space
+  - { key: Grave,     mods: Control,       chars: "\x1b`"                       } # Control + `
+  - { key: Grave,     mods: Control|Shift, chars: "\x1b~"                       } # Control + ~
+  - { key: Period,    mods: Control,       chars: "\x1b."                       } # Control + .
+  - { key: Key8,      mods: Control|Shift, chars: "\x1b*"                       } # Control + *
+  - { key: Key3,      mods: Control|Shift, chars: "\x1b#"                       } # Control + #
+  - { key: Period,    mods: Control|Shift, chars: "\x1b>"                       } # Control + >
+  - { key: Comma,     mods: Control|Shift, chars: "\x1b<"                       } # Control + <
+  - { key: Minus,     mods: Control|Shift, chars: "\x1b_"                       } # Control + _
+  - { key: Key5,      mods: Control|Shift, chars: "\x1b%"                       } # Control + %
+  - { key: Key6,      mods: Control|Shift, chars: "\x1b^"                       } # Control + ^
+  - { key: Backslash, mods: Control,       chars: "\x1b\\"                      } # Control + \
+  - { key: Backslash, mods: Control|Shift, chars: "\x1b|"                       } # Control + |
 
 # Key bindings are specified as a list of objects. For example, this is the
 # default paste binding:
@@ -415,4 +489,3 @@ debug:
   persistent_logging: true
   log_level: Warn
   print_events: false
-
